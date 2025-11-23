@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Training DVNP Professional</title>
+    <style>
+        /* --- LAYOUT DASAR --- */
+        body {
+            margin: 0;
+            background-color: #121212; /* Hitam Elegan */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            overflow: hidden;
+        }
+
+        #app-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            max-width: 480px; /* Standar HP */
+            background: #000;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+        }
+
+        /* --- GAMBAR FULL SCREEN --- */
+        .screen {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            display: none;
+        }
+        .screen.active { display: block; animation: fade 0.4s; }
+        
+        @keyframes fade { from {opacity: 0} to {opacity: 1} }
+
+        .bg-img {
+            width: 100%; height: 100%;
+            object-fit: fill; /* Memaksa gambar penuh layar tanpa sisa */
+            display: block;
+        }
+
+        /* --- TOMBOL HOTSPOT --- */
+        .hotspot {
+            position: absolute;
+            z-index: 50;
+            cursor: pointer;
+            /* MODE EDIT: Warna Merah Transparan (Biar Bapak bisa pas-in posisinya) */
+            /* MODE RILIS: Ganti jadi 'transparent' dan border 'none' */
+            background: rgba(255, 0, 0, 0.15); 
+            border: 1px dashed red;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* --- PANDUAN TEKS PROFESSIONAL --- */
+        .guide-pill {
+            position: absolute;
+            bottom: 30px; left: 50%;
+            transform: translateX(-50%);
+            background: rgba(20, 20, 20, 0.8); /* Gelap transparan */
+            backdrop-filter: blur(5px);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            border: 1px solid rgba(255,255,255,0.2);
+            text-align: center;
+            width: 80%;
+            pointer-events: none;
+            z-index: 100;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+
+<div id="app-container">
+
+    <div id="p-1" class="screen active">
+        <img src="1.png" class="bg-img">
+        <div class="hotspot" style="top: 28%; left: 5%; width: 90%; height: 8%;" onclick="go('p-2', 'Pilih Indonesia (+62)')"></div>
+        <div id="guide" class="guide-pill">Klik kolom Pilih Negara</div>
+    </div>
+
+    <div id="p-2" class="screen">
+        <img src="2.png" class="bg-img">
+        <div class="hotspot" style="top: 48%; left: 0%; width: 100%; height: 8%;" onclick="go('p-3', 'Klik Berikutnya')"></div>
+    </div>
+
+    <div id="p-3" class="screen">
+        <img src="3.png" class="bg-img">
+        <div class="hotspot" style="top: 45%; left: 5%; width: 90%; height: 7%;" onclick="go('p-4', 'Isi Form & Buat Akun')"></div>
+    </div>
+
+    <div id="p-4" class="screen">
+        <img src="4.png" class="bg-img">
+        <div class="hotspot" style="top: 73%; left: 5%; width: 90%; height: 7%;" onclick="go('p-5', 'AWAS! Klik LEWATI (Putih)')"></div>
+    </div>
+
+    <div id="p-5" class="screen">
+        <img src="5.png" class="bg-img">
+        <div class="hotspot" style="top: 64%; left: 15%; width: 32%; height: 7%; border-color: lime;" onclick="go('p-6', 'Klik Atur (Merah)')"></div>
+        <div class="hotspot" style="top: 64%; left: 53%; width: 32%; height: 7%; border-color: blue;" onclick="alert('❌ SALAH! Klik LEWATI (Putih).')"></div>
+    </div>
+
+    <div id="p-6" class="screen">
+        <img src="6.png" class="bg-img">
+        <div class="hotspot" style="top: 90%; left: 5%; width: 90%; height: 7%;" onclick="alert('Password Tersimpan. Sekarang Login.'); go('p-10', 'Pilih Tab MASUK')"></div>
+    </div>
+
+    <div id="p-10" class="screen">
+        <img src="10.png" class="bg-img">
+        <div class="hotspot" style="top: 20%; left: 52%; width: 40%; height: 6%;" onclick="go('p-11', 'Isi Email & Login')"></div>
+    </div>
+
+    <div id="p-11" class="screen">
+        <img src="11.png" class="bg-img">
+        <div class="hotspot" style="top: 46%; left: 5%; width: 90%; height: 7%;" onclick="alert('✅ Login Berhasil!'); go('p-13', 'Akun Siap! Cek UID')"></div>
+    </div>
+
+    <div id="p-13" class="screen">
+        <img src="13.png" class="bg-img">
+        <div class="hotspot" style="top:0; left:0; width:100%; height:100%; border:none;" onclick="if(confirm('Registrasi Selesai. Ulangi?')) location.reload();"></div>
+    </div>
+    
+    </div>
+
+<script>
+    function go(targetId, msg) {
+        // Hilangkan layar aktif
+        document.querySelector('.screen.active').classList.remove('active');
+        
+        // Munculkan layar tujuan
+        document.getElementById(targetId).classList.add('active');
+        
+        // Update teks panduan
+        let guide = document.getElementById('guide');
+        guide.style.opacity = '0';
+        setTimeout(() => {
+            guide.innerText = msg;
+            guide.style.opacity = '1';
+        }, 200);
+    }
+</script>
+
+</body>
+</html>
