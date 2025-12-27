@@ -1,6 +1,6 @@
 {
   "name": "Panduan Registrasi OPALP",
-  "short_name": "Panduan OPALP",
+  "short_name": "Cara Register",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#000000",
