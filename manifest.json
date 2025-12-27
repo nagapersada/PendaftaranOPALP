@@ -1,7 +1,7 @@
 {
   "name": "Panduan Registrasi OPALP",
   "short_name": "Panduan OPALP",
-  "start_url": "./cararegister.html",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#0f172a",
